@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Rubik+Doodle+Shadow&display=swap');
+*{
+    margin: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+#main{
+    width: 100vw;
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    font-family: "Poppins";
+    gap: 10px 0;
+}
+img{
+    height: 200px;
+}
+.res{
+    display: flex;
+    justify-content: space-evenly;
+}
+.res:nth-child(1){
+    border: 4px ridge rgb(39, 107, 170);
+}
+#choise, #aichoise{
+    display: flex;
+    justify-content: space-evenly;
+    height: 200px;
+    width: 100vw;
+    min-width: 250px;
+    position: relative;
+    align-items: center;
+}
+.res h3{
+    padding: 5px;
+}
+.res p{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70px;
+    width: 70px;
+    font: 45px "Rubik Doodle Shadow";
+    border: 4px ridge rgb(39, 107, 170);
+}
+#choise>p:not(.blink){
+    transform: scale(3.5);
+    transition: all 0.8s linear;
+    cursor: pointer;
+    animation: rotateY 3s 0.5s infinite linear;
+    filter:drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.74));
+}
+#aichoise p{
+    transform: rotateX(180deg) scale(3.5);
+    transition: all 1s linear;
+    filter:drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.74)) grayscale(100%);
+}
+/*.blink{
+    animation: blink 0.8s 0.5s infinite linear;
+    transform: scale(3.5);
+    transition: all 0.8s linear;
+    position: absolute;
+    top: 0;
+}
+@keyframes blink {
+    50%{opacity: 0.1;}
+}*/
+@keyframes rotateY {
+    50%{transform: scale(3.5) rotateY(180deg);}
+}
