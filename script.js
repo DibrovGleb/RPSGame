@@ -84,7 +84,7 @@ class Game {
     // Robot icon animation
     static animateRobot(imagename, classname){
         setTimeout(() => {
-            robotimg.src = `icons/${imagename}.png`
+            robotimg.src = `https://raw.githubusercontent.com/DibrovGleb/RPSGame/main/icons/${imagename}.png`
             robotimg.classList.add(classname)
             setTimeout(() => {
                 robotimg.classList.remove(classname)
