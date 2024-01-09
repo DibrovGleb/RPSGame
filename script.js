@@ -6,71 +6,59 @@ wins = doc.querySelector('#wins'),
 loses = doc.querySelector('#loses'),
 ties = doc.querySelector('#ties'),
 total = doc.querySelector('#total'),
-choisecontainer = doc.querySelector('#choise')
+choisecontainer = doc.querySelector('#choise'),
+robotimg = doc.querySelector('#robot')
 
 class Game {
     static gamesCount = 0;
-    static gamearr = ['Камень', 'Ножницы', 'Бумага']
     static wins = 0;
     static lose = 0;
     static tie = 0;
+    /*static winstreak = 0;
+    static losestreak = 0;
+    static tiestreal = 0;*/
 
     static play (userChoise,aiChoise) {
-        console.log(userChoise, aiChoise)
         if (userChoise == aiChoise) {
-            Game.gamesCount++
-            Game.tie++
+            return this.score(2)
         }
         else {
             switch (userChoise) {
                 case '0':
-                aiChoise == 1 ? Game.score(1) : Game.score(0)
-                break
+                return aiChoise == 1 ? this.score(1) : this.score(0)
                 case '1':
-                aiChoise == 0 ? Game.score(0) : Game.score(1)
-                break
+                return aiChoise == 0 ? this.score(0) : this.score(1)
                 default:
-                aiChoise == 0 ? Game.score(1) : Game.score(0)
-                break
+                return aiChoise == 0 ? this.score(1) : this.score(0)
             }
         }
     }   
     
     static score (result){
-        Game.gamesCount++
-        result == 1 ? Game.wins++ : Game.lose++
+        this.gamesCount++
+        result == 2 ? this.tie++ + this.animateRobot('what', 'moveup')
+        : result == 1 ? this.wins++ + this.animateRobot('angry', 'moveright') 
+        : this.lose++ + this.animateRobot('happy', 'scaledown')
+        return result
     }
 
     static displayScore(){
-        wins.innerText = Game.wins
-        loses.innerText = Game.lose
-        ties.innerText = Game.tie
-        total.innerText = Game.gamesCount
+        wins.innerText = this.wins
+        loses.innerText = this.lose
+        ties.innerText = this.tie
+        total.innerText = this.gamesCount
     }
 
     static fight(elem){
-
-        iconsComp.forEach(icncomp => {
-            icncomp.style.opacity = '0'
-            setTimeout(() => {
-                icncomp.style.display = 'none'
-            }, 1000)
-        })
-
-        iconsPlayer.forEach(icn => {
-            icn.style.opacity = '0'
-            setTimeout(() => {
-                icn.style.display = 'none'
-            }, 1000)
-        })
+        this.iconsAnimation(1)
 
         setTimeout(() => {
                 let aires = Game.getAiChoise()
 
-                iconsComp[aires].style.cssText = "display: block; opacity:1"
-                elem.target.style.cssText = "display: block; opacity:1"
+                iconsComp[aires].style.cssText = "display: block; opacity:1;"
+                elem.target.style.cssText = "display: block; opacity:1; pointer-events: none;"
                 setTimeout(() => {
-                    Game.play(elem.target.id, aires);
+                    this.animateWin(this.play(elem.target.id, aires), iconsComp[aires], elem.target)
                     Game.displayScore()
                     setTimeout(() => {
                         Game.newgame()
@@ -84,26 +72,59 @@ class Game {
     }
 
     static newgame(){
-        iconsComp.forEach(icncomp => {
-            icncomp.style.display = 'block'
-            setTimeout(() => {
-                icncomp.style.opacity = '1'
-            }, 500);
-        })
-        iconsPlayer.forEach(icn => {
-            icn.style.display = 'block'
-            setTimeout(() => {
-                icn.style.opacity = '1'
-            }, 500);
-        })
+        this.iconsAnimation(0)
     }
-    /*
-    static animatewin(winner){
-        winner.style.cssText = "animation: rotateY 3s 0.5s infinite linear;"
-    }
-    */
-}
 
+    
+    static animateWin(winner){
+        //winner.style.cssText = "transform: scale(3.5) rotateY(180deg)"
+        console.log(winner)
+    }
+
+    // Robot icon animation
+    static animateRobot(imagename, classname){
+        setTimeout(() => {
+            robotimg.src = `icons/${imagename}.png`
+            robotimg.classList.add(classname)
+            setTimeout(() => {
+                robotimg.classList.remove(classname)
+            }, 500);  
+        }, 200);
+    }
+
+    // icons fade in fade out animations 
+    static iconsAnimation(value){
+        if (value == 1){
+            iconsComp.forEach(icncomp => {
+                icncomp.style.opacity = '0'
+                setTimeout(() => {
+                    icncomp.style.display = 'none'
+                }, 1000)
+            })
+
+            iconsPlayer.forEach(icn => {
+                icn.style.cssText = 'opacity:0; pointer-events: none;'
+                setTimeout(() => {
+                    icn.style.display = 'none'
+                }, 1000)
+            })
+        }
+        else {
+            iconsComp.forEach(icncomp => {
+                icncomp.style.display = 'block'
+                setTimeout(() => {
+                    icncomp.style.opacity = '1'
+                }, 500);
+            })
+            iconsPlayer.forEach(icn => {
+                icn.style.display = 'block'
+                setTimeout(() => {
+                    icn.style.cssText = 'opacity:1; pointer-events: auto;'
+                }, 500);
+            })
+        }
+    }
+}
 
 iconsPlayer.forEach(element => {
     element.addEventListener('click', (elem)=>{

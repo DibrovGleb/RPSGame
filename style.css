@@ -14,39 +14,60 @@
 }
 img{
     height: 200px;
+    transition: all 1s linear;
+    margin: 10px 0;
+}
+#container{
+    border: 6px ridge rgb(39, 107, 170);
 }
 .res{
     display: flex;
-    justify-content: space-evenly;
+
 }
 .res:nth-child(1){
     border: 4px ridge rgb(39, 107, 170);
 }
-#choise, #aichoise{
-    display: flex;
-    justify-content: space-evenly;
-    height: 200px;
-    width: 100vw;
-    min-width: 250px;
-    position: relative;
-    align-items: center;
-}
 .res h3{
-    padding: 5px;
+    font-size: 24px;
+}
+.res h3:nth-child(-n+2){
+    border-right: 4px ridge rgb(39, 107, 170);
+}
+.res h3:nth-child(n+2){
+    border-left: 4px ridge rgb(39, 107, 170);
+}
+.res h3:first-child{
+    padding: 5px 7px 5px 8px;
+}
+.res h3:nth-child(2){
+    padding: 5px 3px;
+}
+.res h3:last-child{
+    padding: 5px 10px 5px 12px;
 }
 .res p{
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 70px;
-    width: 70px;
-    font: 45px "Rubik Doodle Shadow";
+    height: 80px;
+    width: 80px;
+    min-width: max-content;
+    font: 50px "Rubik Doodle Shadow";
     border: 4px ridge rgb(39, 107, 170);
 }
-#choise>p:not(.blink){
+#choise, #aichoise{
+    display: flex;
+    justify-content: space-evenly;
+    height: 15vh;
+    width: 100vw;
+    min-width: 250px;
+    position: relative;
+    align-items: center;
+}
+#choise>p{
     transform: scale(3.5);
-    transition: all 0.8s linear;
     cursor: pointer;
+    transition: all 1s linear;
     animation: rotateY 3s 0.5s infinite linear;
     filter:drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.74));
 }
@@ -55,6 +76,17 @@ img{
     transition: all 1s linear;
     filter:drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.74)) grayscale(100%);
 }
+/* Robot animations classes */
+.moveup{
+    transform: translateY(-40px)
+}
+.moveright{
+    transform: translateX(20px);
+}
+.scaledown{
+    transform: scale(0.5);
+}
+
 /*.blink{
     animation: blink 0.8s 0.5s infinite linear;
     transform: scale(3.5);
@@ -64,7 +96,7 @@ img{
 }
 @keyframes blink {
     50%{opacity: 0.1;}
-}*/
+}
 @keyframes rotateY {
     50%{transform: scale(3.5) rotateY(180deg);}
-}
+}*/
