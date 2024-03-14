@@ -8,6 +8,6 @@
 ![GitHub](https://img.shields.io/badge/-GitHub-181717?style=for-the-badge&logo=github)
 
 ## Камень Ножницы Бумага / Rock Paper Scissors
-![Игра гиф](https://i.imgur.com/wfmJc6f.gif "Игра")
+![Игра гиф](https://i.imgur.com/RbHnvfm.gif "Игра")
 
 </div>
